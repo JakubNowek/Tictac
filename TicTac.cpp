@@ -79,10 +79,140 @@ void Game::printBoard()
     cout << endl << endl;
 }
 
-
+//////////////////////////////////////////to do /////////////////////////////////////
 bool Game::isWin(char player)
 {
-    return true;
+
+    //Poziomo
+    int counter;
+    for (int i = 0; i < size; ++i)
+    {
+        counter = 0;
+        for (int j = 0; j < size - 1; ++j)
+        {
+            if (Board[i][j] == Board[i][j + 1] && Board[i][j + 1] == player)
+            {
+                counter++;
+                if (counter == winNumber - 1) // czy tutaj serio -1?
+                    return true;
+            }
+            else
+                counter = 0;
+        }
+    }
+
+    //Pionowo
+    for (int j = 0; j < size; ++j)
+    {
+        counter = 0;
+        for (int i = 0; i < size - 1; ++i)
+        {
+            if (Board[i][j] == Board[i + 1][j] && Board[i + 1][j] == player)
+            {
+                counter++;
+                if (counter == winNumber - 1) // czy tutaj serio -1?
+                    return true;
+            }
+            else
+                counter = 0;
+        }
+    }
+
+    // Przek¹tne
+        //00<->nn
+    counter = 0;
+    for (int i = 0; i < size - 1; ++i)
+    {
+        if (Board[i][i] == Board[i + 1][i + 1] && Board[i + 1][i + 1] == player)
+        {
+            counter++;
+            if (counter == winNumber - 1)// czy tutaj serio -1?
+                return true;
+        }
+        else
+            counter = 0;
+    }
+        //n0<->0n 
+    for (int i = 0; i < size - 1; ++i)
+    {
+        if (Board[i][size - 1 - i] == Board[i + 1][size - 1 - (i + 1)] && Board[i + 1][size - 1 - (i + 1)] == player)
+        {
+            counter++;
+            if (counter == winNumber - 1) // czy tutaj serio -1?
+                return true;
+        }
+        else
+            counter = 0;
+    }
+
+    // Pozostale przekatne
+    if (winNumber < size)
+    {
+        // Powyzej 00<->nn
+        for (int i = 1; i <= size - winNumber; i++)
+        {
+            for (int j = 0; j < size - i - 1; ++j)
+            {
+                if (Board[i + j][j] == Board[i + j + 1][j + 1] && Board[i + j + 1][j + 1] == player)
+                {
+                    counter++;
+                    if (counter == winNumber - 1) // czy tutaj serio -1?
+                        return true;
+                }
+                else
+                    counter = 0;
+            }
+        }
+
+        // Ponizej 00<->nn
+        for (int i = 1; i <= size - winNumber; i++)
+        {
+            for (int j = 0; j < size - i - 1; ++j)
+            {
+                if (Board[j][j + i] == Board[j + 1][j + 1 + i] && Board[j + 1][i + j + 1] == player)
+                {
+                    counter++;
+                    if (counter == winNumber - 1) // czy tutaj serio -1?
+                        return true;
+                }
+                else
+                    counter = 0;
+            }
+        }
+
+        // Powyzej n0<->0n
+        for (int i = 1; i < size - 1; ++i)
+        {
+            for (int j = 0; j <= size - winNumber - i; ++j)
+            {
+                if (Board[size - (i + j) - 1][size - (size - j)] == Board[size - (i + j) - 1 - 1][size - (size - j) + 1] && Board[size - (i + j) - 1 - 1][size - (size - j) + 1] == player)
+                {
+                    counter++;
+                    if (counter == winNumber - 1) // czy tutaj serio -1?
+                        return true;
+                }
+                else
+                    counter = 0;
+            }
+        }
+
+        // Ponizej n0<->0n
+        for (int i = 1; i <= size - winNumber; ++i)
+        {
+            for (int j = size - i - 1; j >= 1; --j)
+            {
+                if (Board[i + j][size - 1 - j] == Board[i + j - 1][size - j] && Board[i + j - 1][size - j] == player)
+                {
+                    counter++;
+                    if (counter == winNumber - 1) // czy tutaj serio -1?
+                        return true;
+                }
+                else
+                    counter = 0;
+            }
+        }
+    }
+    return false;
 }
 
 bool Game::isFree(int i, int j)
@@ -118,11 +248,11 @@ void Game::playerTurn(char player)
         ////cin >> Tab[1];
         if (Tab[0]<0 || Tab[0]>size - 1 || Tab[1]<0 || Tab[1]>size - 1)
         {
-            cout << "Wspolrzedne poza tablica\n";
+            cout << "Nie ma tekiego pola :( \n";
         }
         else if (isFree(Tab[0],Tab[1]) == false)
         {
-            cout << "Ta komorka jest zajeta\n";
+            cout << "Pole zajete :( \n";
         }
         else
         {
@@ -132,7 +262,7 @@ void Game::playerTurn(char player)
     }         while (!done);
 }
 
-
+///////////////////////////////////////////////////////////////to do/////////////////////////////////////////////////////////
 void Game::Minmax(int node, char player, int depth)
 {
 

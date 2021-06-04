@@ -28,7 +28,7 @@ public:
     bool isWin(char player);
 
     /**
-     * @brief Sprawdza, czy plansza jest wolna
+     * @brief Sprawdza, czy na planszy jest wolne pole
      * @return 
     */
     bool isEmpty();
