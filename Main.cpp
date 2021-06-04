@@ -1,4 +1,4 @@
-#include "Minmax.h"
+#include "TicTac.h"
 
 int main() {
 	Purwat();
