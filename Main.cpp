@@ -1,7 +1,7 @@
 #include "TicTac.h"
 
 int main() {
-	Purwat();
+
 
 
 

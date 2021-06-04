@@ -1,4 +1,49 @@
 #pragma once
 #include <iostream>
 
-void Purwat();
+class Game {
+    char** Board; //tablica dwuwymiarowa - plansza
+    int size; // zmienna odpowiadaj¹ca za rozmiar planszy size x size
+    int winNumber; //zmienna okreœlaj¹ca ile musi byæ ksza³tów w linii, ¿eby wygraæ
+public:
+    Game(); // kontruktor domyœlny
+    Game(int size); //konstruktor, jeœli podamy rozmiar planszy
+
+    /**
+     * @brief tworzenie
+    */
+    void setBoard();
+
+    /**
+     * @brief wypisywanie planszy
+    */
+    void printBoard();
+
+    /**
+     * @brief Sprawdza czy gracz player wygra³
+     * @param player - gracz - komputer lub cz³owiek
+     * @return zwraca True jeœli gracz player wygra³
+    */
+    bool isWin(char player);
+
+    /**
+     * @brief Sprawdza, czy dane pole planszy jest wolne
+     * @return 
+    */
+    bool isFree();
+
+    /**
+     * @brief Wykonywanie ruchu gracza
+     * @param player - gracz, ktry wykonuje ruch 
+    */
+    void playerTurn(char player);
+
+    /**
+     * @brief Realizuje algorytm minmax oraz ruch komputera, jeœli player = PC
+     * @param node - poziom drzewa gry
+     * @param player - gracz wykonuj¹cy ruch na danym poziomie
+     * @param depth - g³êbokoœæ rekurenncji
+    */
+    void Minmax(int node,char player,int depth);
+
+};
