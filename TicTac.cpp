@@ -79,7 +79,6 @@ void Game::printBoard()
     cout << endl << endl;
 }
 
-//////////////////////////////////////////to do /////////////////////////////////////
 bool Game::isWin(char player)
 {
 
@@ -263,7 +262,61 @@ void Game::playerTurn(char player)
 }
 
 ///////////////////////////////////////////////////////////////to do/////////////////////////////////////////////////////////
-void Game::Minmax(int node, char player, int depth)
+int Game::Minmax(int node, char player, int depth)
 {
-
+    int counter = 0;
+    int row = NULL, column=NULL;
+    for (int i = 0; i < size; ++i)
+    {
+        for (int j = 0; j < size; ++j)
+        {
+            if (Board[i][j] == ' ')
+            {
+                Board[i][j] = player;
+                column = j;
+                row = i;
+                counter++;
+                bool test = isWin(player);
+                Board[i][j] = ' ';
+                if (test)
+                {
+                    if (!node)
+                        Board[i][j] = player;
+                    return player == 'X' ? -1 : 1;
+                }
+            }
+        }
+    }
+   // Czy X i O zremisowali
+    if (counter == 1)
+    {
+        if (!node)
+            Board[row][column] = player;
+        return 0;
+    }
+    // Wybór ruchu
+    int V, VMax;
+    VMax = (player == 'X' ? size - 1 : -size + 1);
+    for (int i = 0; i < depth; ++i)
+    {
+        for (int j = 0; j < depth; ++j)
+        {
+            if (Board[i][j] == ' ')
+            {
+                Board[i][j] = player;
+                V = Minmax(node + 1, (player == 'X' ? 'O' : 'X'), depth);
+                Board[i][j] = ' ';
+                if (((player == 'X') && (V < VMax)) || ((player == 'O') && V > VMax))
+                {
+                    row = i;
+                    column = j;
+                    VMax = V;
+                }
+            }
+        }
+    }
+    if (!node)
+        Board[row][column] = player;
+    cout << "Counter: " << counter << endl;
+    return VMax;
 }
