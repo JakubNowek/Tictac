@@ -1,16 +1,17 @@
 #pragma once
 #include <iostream>
-
+#define X_MAN 'X'
+#define O_MAN 'O'
 class Game {
     char** Board; //tablica dwuwymiarowa - plansza
     int size; // zmienna odpowiadaj¹ca za rozmiar planszy size x size
     int winNumber; //zmienna okreœlaj¹ca ile musi byæ ksza³tów w linii, ¿eby wygraæ
 public:
-    Game(); // kontruktor domyœlny
-    Game(int size); //konstruktor, jeœli podamy rozmiar planszy
+    Game(); // kontruktor domyœlny tworzy plansze do gry
+    Game(int inSize, int inWinNumber); //konstruktor, jeœli podamy rozmiar planszy
 
     /**
-     * @brief tworzenie
+     * @brief resetowanie planszy
     */
     void setBoard();
 
