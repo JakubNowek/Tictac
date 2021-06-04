@@ -48,7 +48,7 @@ void Game::setBoard()
     for (int j = 0; j < size; ++j)
         for (int k = 0; k < size; ++k)
         {
-            Board[j][k] = 'Z';
+            Board[j][k] = ' ';
         }
 }
 
@@ -88,7 +88,15 @@ bool Game::isWin(char player)
 
 bool Game::isFree()
 {
-    return true;
+    for (int k = 0; k < size; ++k)
+    {
+        for (int l = 0; l < size; ++l)
+        {
+            if (Board[k][l] == ' ')
+                return true;
+        }
+    }
+    return false;
 }
 
 
