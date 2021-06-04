@@ -28,10 +28,18 @@ public:
     bool isWin(char player);
 
     /**
-     * @brief Sprawdza, czy dane pole planszy jest wolne
+     * @brief Sprawdza, czy plansza jest wolna
      * @return 
     */
-    bool isFree();
+    bool isEmpty();
+
+    /**
+     * @brief sprawdza czy dane pole tablicy jest wolne
+     * @param i - zmienna oznaczaj¹ca numer rzêdu tablicy
+     * @param j - zmienna oznacz¹ca numer kolumy tablicy
+     * @return  - zwraca true jeœli dana komórka Board[i][j] jest wolna
+    */
+    bool isFree(int i, int j);
 
     /**
      * @brief Wykonywanie ruchu gracza

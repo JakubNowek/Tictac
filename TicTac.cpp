@@ -85,8 +85,14 @@ bool Game::isWin(char player)
     return true;
 }
 
+bool Game::isFree(int i, int j)
+{
+    if (Board[i][j] == ' ')
+        return true;
+    return false;
+}
 
-bool Game::isFree()
+bool Game::isEmpty()
 {
     for (int k = 0; k < size; ++k)
     {
@@ -102,7 +108,28 @@ bool Game::isFree()
 
 void Game::playerTurn(char player)
 {
-
+    int Tab[2];
+    bool done = false;
+    do
+    {
+        cout << "Podaj wiersz i kolumne:\n";
+        cin >> Tab[0]>>Tab[1];
+        //cout << "Podaj kolumne:\n";
+        ////cin >> Tab[1];
+        if (Tab[0]<0 || Tab[0]>size - 1 || Tab[1]<0 || Tab[1]>size - 1)
+        {
+            cout << "Wspolrzedne poza tablica\n";
+        }
+        else if (isFree(Tab[0],Tab[1]) == false)
+        {
+            cout << "Ta komorka jest zajeta\n";
+        }
+        else
+        {
+            Board[Tab[0]][Tab[1]] = player;
+            done = true;
+        }
+    }         while (!done);
 }
 
 
