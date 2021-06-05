@@ -54,5 +54,4 @@ public:
      * @param depth - g³êbokoœæ rekurenncji
     */
     int Minmax(int node,char player,int depth);
-
 };

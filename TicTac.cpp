@@ -265,7 +265,7 @@ void Game::playerTurn(char player)
 int Game::Minmax(int node, char player, int depth)
 {
     int counter = 0;
-    int row = NULL, column=NULL;
+    int row , column;
     for (int i = 0; i < size; ++i)
     {
         for (int j = 0; j < size; ++j)
@@ -291,8 +291,10 @@ int Game::Minmax(int node, char player, int depth)
     if (counter == 1)
     {
         if (!node)
-            Board[row][column] = player;
+         //Board[row][column] = player;
+            cout << "REMIS SIUSIACZKI" << endl;
         return 0;
+    
     }
     // Wybór ruchu
     int V, VMax;
@@ -316,7 +318,12 @@ int Game::Minmax(int node, char player, int depth)
         }
     }
     if (!node)
+    {
         Board[row][column] = player;
+    }
+
     cout << "Counter: " << counter << endl;
     return VMax;
 }
+
+
