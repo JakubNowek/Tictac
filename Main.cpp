@@ -25,7 +25,7 @@ int main() {
 		if (!TheGame->isEmpty())
 			break;
 		cout << "Ruch komputera." << endl;
-		TheGame->Minmax(0, X_MAN, 3,22222,-22222);
+		TheGame->Minmax(0, X_MAN, size,-22222,22222);
 		TheGame->printBoard();
 		TheGame->getWminmax() = false;
 		if (TheGame->isWin(X_MAN))

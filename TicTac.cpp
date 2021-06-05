@@ -300,6 +300,104 @@ void Game::playerTurn(char player)
 }
 
 
+//int Game::Minmax(int node, char player, int depth, int alpha, int beta)
+//{
+//    int counter = 0;
+//    int row, column;
+//    if (!isEmpty())
+//    {
+//        return 0;
+//    }
+//    for (int i = 0; i < size; ++i)
+//    {
+//        for (int j = 0; j < size; ++j)
+//        {
+//            if (isFree(i,j))
+//            {
+//                Board[i][j] = player;
+//                column = j;
+//                row = i;
+//                counter++;
+//                wminmax = true;
+//                bool test = isWin(player);
+//               
+//                Board[i][j] = ' ';
+//                if (test)
+//                {
+//                    if (!node)
+//                        Board[i][j] = player;
+//                    return player == 'X' ? -1 : 1;
+//                }
+//            }
+//        }
+//    }
+//    // Czy X i O zremisowali
+//    if (counter == 1)
+//    {
+//        if (!node)
+//            Board[row][column] = player;
+//        return 0;
+//
+//    }
+//    
+//    // Wybór ruchu
+//    int V, VMax;
+//    VMax = (player == 'X' ? size - 1 : -size + 1);
+//    for (int i = 0; i < depth; ++i)
+//    {
+//        for (int j = 0; j < depth; ++j)
+//        {
+//            if (isFree(i, j))
+//            {
+//
+//                Board[i][j] = player;
+//                V = Minmax(node + 1, (player == 'X' ? 'O' : 'X'), depth, alpha, beta);
+//                Board[i][j] = ' ';
+//                if (player == 'O')
+//                {
+//                    if (beta <= V)
+//                    {
+//                        beta = V;
+//                        column = j;
+//                        row = i;
+//                        if (alpha >= beta)
+//                        {
+//                            break;
+//                        }
+//                    }
+//                }
+//                else
+//                {
+//                    if (alpha >= V)
+//                    {
+//                        alpha = V;
+//                        column = j;
+//                        row = i;
+//                        if (alpha >= beta)
+//                        {
+//                            break;
+//                        }
+//                    }
+//                }
+//                //if (((player == 'X') && (V < VMax)) || ((player == 'O') && V > VMax))
+//                //{
+//                //    row = i;
+//                //    column = j;
+//                //    VMax = V;
+//                //}
+//            }
+//        }
+//    }
+//    if (!node)
+//    {
+//        Board[row][column] = player;
+//    }
+//
+//   // cout << "Counter: " << counter << endl;
+//    //player == 'O' ? alpha : beta;
+//    return player == 'O' ? alpha : beta;
+//}
+
 int Game::Minmax(int node, char player, int depth, int alpha, int beta)
 {
     int counter = 0;
