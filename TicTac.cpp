@@ -277,6 +277,7 @@ void Game::playerTurn(char player)
         bool done = false;
         do
         {
+            cout << "Twoj ruch mistrzu. ";
             cout << "Podaj wiersz i kolumne:\n";
             cin >> Tab[0] >> Tab[1];
             //cout << "Podaj kolumne:\n";
@@ -311,7 +312,7 @@ int Game::Minmax(int node, char player, int depth, int alpha, int beta)
     {
         for (int j = 0; j < size; ++j)
         {
-            if (Board[i][j] == ' ')
+            if (isFree(i,j))
             {
                 Board[i][j] = player;
                 column = j;
@@ -335,7 +336,6 @@ int Game::Minmax(int node, char player, int depth, int alpha, int beta)
     {
         if (!node)
             Board[row][column] = player;
-        //cout << "REMIS SIUSIACZKI" << endl;
         return 0;
 
     }
@@ -347,7 +347,7 @@ int Game::Minmax(int node, char player, int depth, int alpha, int beta)
     {
         for (int j = 0; j < depth; ++j)
         {
-            if (Board[i][j] == ' ')
+            if (isFree(i, j))
             {
                 Board[i][j] = player;
                 V = Minmax(node + 1, (player == 'X' ? 'O' : 'X'), depth, alpha, beta);
