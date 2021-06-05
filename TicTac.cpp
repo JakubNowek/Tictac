@@ -89,12 +89,13 @@ bool Game::isWin(char player)
         counter = 0;
         for (int j = 0; j < size - 1; ++j)
         {
-            if (Board[i][j] == Board[i][j + 1] && Board[i][j + 1] == player)
+            if ( (Board[i][j] == Board[i][j + 1] ) && ( Board[i][j + 1] == player ) )
             {
                 counter++;
                 if (counter == winNumber - 1) 
                 {
-                    cout << "Wygrana poziomo" << endl;
+                    if(!wminmax)
+                    cout << "Wygrana "<<player<< " poziomo" << endl;
                     return true;
                 }
                 
@@ -110,12 +111,13 @@ bool Game::isWin(char player)
         counter = 0;
         for (int i = 0; i < size - 1; ++i)
         {
-            if (Board[i][j] == Board[i + 1][j] && Board[i + 1][j] == player)
+            if ( ( Board[i][j] == Board[i + 1][j] ) && ( Board[i + 1][j] == player ) )
             {
                 counter++;
                 if (counter == winNumber - 1) 
                 {
-                    cout << "Wygrana pionowo" << endl;
+                    if (!wminmax)
+                    cout << "Wygrana " << player << " pionowo" << endl;
                     return true;
                 }
             }
@@ -129,27 +131,31 @@ bool Game::isWin(char player)
     counter = 0;
     for (int i = 0; i < size - 1; ++i)
     {
-        if (Board[i][i] == Board[i + 1][i + 1] && Board[i + 1][i + 1] == player)
+        if ( ( Board[i][i] == Board[i + 1][i + 1] ) && ( Board[i + 1][i + 1] == player ) )
         {
             counter++;
             if (counter == winNumber - 1)
             {
-                cout << "Wygrana po przekatnej lewa gora" << endl;
+                if (!wminmax)
+                cout << "Wygrana " << player << " po przekatnej lewa gora" << endl;
                 return true;
             }
         }
         else
             counter = 0;
     }
+
+    counter = 0;
         //n0<->0n 
     for (int i = 0; i < size - 1; ++i)
     {
-        if (Board[i][size - 1 - i] == Board[i + 1][size - 1 - (i + 1)] && Board[i + 1][size - 1 - (i + 1)] == player)
+        if ((Board[i + 1][size - 1 - (i + 1)] == player) && ( Board[i][size - 1 - i]  == Board[i + 1][size - 1 - (i + 1)] )  )
         {
             counter++;
             if (counter == winNumber - 1) 
             {
-                cout << "Wygrana po przekatnej lewa dol" << endl;
+                if (!wminmax)
+                cout << "Wygrana " << player << " po przekatnej lewa dol" << endl;
                 return true;
             }
         }
@@ -165,12 +171,13 @@ bool Game::isWin(char player)
         {
             for (int j = 0; j < size - i - 1; ++j)
             {
-                if (Board[i + j][j] == Board[i + j + 1][j + 1] && Board[i + j + 1][j + 1] == player)
+                if ( ( Board[i + j][j] == Board[i + j + 1][j + 1] ) && ( Board[i + j + 1][j + 1] == player ) )
                 {
                     counter++;
                     if (counter == winNumber - 1) 
                     {
-                        cout << "Wygrana powyzej lewa gora" << endl;
+                        if (!wminmax)
+                        cout << "Wygrana " << player << " powyzej lewa gora" << endl;
                         return true;
                     }
                 }
@@ -184,12 +191,13 @@ bool Game::isWin(char player)
         {
             for (int j = 0; j < size - i - 1; ++j)
             {
-                if (Board[j][j + i] == Board[j + 1][j + 1 + i] && Board[j + 1][i + j + 1] == player)
+                if ( ( Board[j][j + i] == Board[j + 1][j + 1 + i] )  && ( Board[j + 1][i + j + 1] == player ) )
                 {
                     counter++;
                     if (counter == winNumber - 1) 
                     {
-                        cout << "Wygrana ponizej lewa gora" << endl;
+                        if (!wminmax)
+                        cout << "Wygrana " << player << " ponizej lewa gora" << endl;
                         return true;
                     }
                 }
@@ -203,12 +211,13 @@ bool Game::isWin(char player)
         {
             for (int j = 0; j <= size - winNumber - i; ++j)
             {
-                if (Board[size - (i + j) - 1][size - (size - j)] == Board[size - (i + j) - 1 - 1][size - (size - j) + 1] && Board[size - (i + j) - 1 - 1][size - (size - j) + 1] == player)
+                if ( ( Board[size - (i + j) - 1][size - (size - j)] == Board[size - (i + j) - 1 - 1][size - (size - j) + 1] ) && ( Board[size - (i + j) - 1 - 1][size - (size - j) + 1]== player ) )
                 {
                     counter++;
                     if (counter == winNumber - 1) 
                     {
-                        cout << "Wygrana powyzej lewa dol" << endl;
+                        if (!wminmax)
+                        cout << "Wygrana " << player << " powyzej lewa dol" << endl;
                         return true;
                     }
                 }
@@ -222,12 +231,13 @@ bool Game::isWin(char player)
         {
             for (int j = size - i - 1; j >= 1; --j)
             {
-                if (Board[i + j][size - 1 - j] == Board[i + j - 1][size - j] && Board[i + j - 1][size - j] == player)
+                if ( ( Board[i + j][size - 1 - j] == Board[i + j - 1][size - j] ) && ( Board[i + j - 1][size - j] == player ) )
                 {
                     counter++;
                     if (counter == winNumber - 1) 
                     {
-                        cout << "Wygrana ponizej lewa dol" << endl;
+                        if (!wminmax)
+                        cout << "Wygrana " << player << " ponizej lewa dol" << endl;
                         return true;
                     }
                 }
@@ -307,7 +317,9 @@ int Game::Minmax(int node, char player, int depth, int alpha, int beta)
                 column = j;
                 row = i;
                 counter++;
+                wminmax = true;
                 bool test = isWin(player);
+               
                 Board[i][j] = ' ';
                 if (test)
                 {
@@ -358,69 +370,6 @@ int Game::Minmax(int node, char player, int depth, int alpha, int beta)
     return VMax;
 }
 
-///////////////////////////////////////////////////////////////to do/////////////////////////////////////////////////////////
-//int Game::Minmax(int node, char player, int depth)
-//{
-//    int counter = 0;
-//    int row , column;
-//    for (int i = 0; i < size; ++i)
-//    {
-//        for (int j = 0; j < size; ++j)
-//        {
-//            if (Board[i][j] == ' ')
-//            {
-//                Board[i][j] = player;
-//                column = j;
-//                row = i;
-//                counter++;
-//                bool test = isWin(player);
-//                Board[i][j] = ' ';
-//                if (test)
-//                {
-//                    if (!node)
-//                        Board[i][j] = player;
-//                    return player == 'X' ? -1 : 1;
-//                }
-//            }
-//        }
-//    }
-//   // Czy X i O zremisowali
-//    if (counter == 1)
-//    {
-//        if (!node)
-//         //Board[row][column] = player;
-//            cout << "REMIS SIUSIACZKI" << endl;
-//        return 0;
-//    
-//    }
-//    // Wybór ruchu
-//    int V, VMax;
-//    VMax = (player == 'X' ? size - 1 : -size + 1);
-//    for (int i = 0; i < depth; ++i)
-//    {
-//        for (int j = 0; j < depth; ++j)
-//        {
-//            if (Board[i][j] == ' ')
-//            {
-//                Board[i][j] = player;
-//                V = Minmax(node + 1, (player == 'X' ? 'O' : 'X'), depth);
-//                Board[i][j] = ' ';
-//                if (((player == 'X') && (V < VMax)) || ((player == 'O') && V > VMax))
-//                {
-//                    row = i;
-//                    column = j;
-//                    VMax = V;
-//                }
-//            }
-//        }
-//    }
-//    if (!node)
-//    {
-//        Board[row][column] = player;
-//    }
-//
-//    cout << "Counter: " << counter << endl;
-//    return VMax;
-//}
+
 
 

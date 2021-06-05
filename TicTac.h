@@ -6,6 +6,7 @@ class Game {
     char** Board; //tablica dwuwymiarowa - plansza
     int size; // zmienna odpowiadaj¹ca za rozmiar planszy size x size
     int winNumber; //zmienna okreœlaj¹ca ile musi byæ ksza³tów w linii, ¿eby wygraæ
+    bool wminmax;
 public:
     Game(); // kontruktor domyœlny tworzy plansze do gry
     Game(int inSize, int inWinNumber); //konstruktor, jeœli podamy rozmiar planszy
@@ -54,4 +55,7 @@ public:
      * @param depth - g³êbokoœæ rekurenncji
     */
     int Minmax(int node,char player,int depth, int aplha, int beta);
+
+
+    bool &getWminmax() { return wminmax; }
 };
