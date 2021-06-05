@@ -5,27 +5,28 @@ using namespace std;
 int main() {
 	int size = 3;
 	Game* TheGame = new Game(size,3);
+	cout << "Wybrano pole " << size << " x " << size << endl;
 	TheGame->setBoard();
 	TheGame->printBoard();
-	while (TheGame->isWin(X_MAN) == false && TheGame->isWin(O_MAN) == false)
+	while(TheGame->isEmpty() )
 	{
 
 		TheGame->playerTurn(O_MAN);
 		TheGame->printBoard();
-		TheGame->Minmax(0, X_MAN, 3);
-		//if (TheGame->isWin(X_MAN) == true)
-		//{
-		//	cout << "gratuluje wygranej panie X" << endl;
-
-		//}
-		//if (TheGame->isWin(O_MAN) == true)
-		//{
-		//	cout << "gratuluje wygranej panie O" << endl;
-
-		//}
+		if (TheGame->isWin(O_MAN))
+		{
+			cout << "WYGRANA O" << endl;
+			break;
+		}
+		TheGame->Minmax(0, X_MAN, 3,22222,-22222);
 		TheGame->printBoard();
-
+		if (TheGame->isWin(X_MAN))
+		{
+			cout << "WYGRANA X" << endl;
+			break;
+		}
 	}
+	TheGame->printBoard();
 	delete TheGame; //kasowanie tablicy dyniamicznej?
 	return 0;
 }

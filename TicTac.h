@@ -53,5 +53,5 @@ public:
      * @param player - gracz wykonuj¹cy ruch na danym poziomie
      * @param depth - g³êbokoœæ rekurenncji
     */
-    int Minmax(int node,char player,int depth);
+    int Minmax(int node,char player,int depth, int aplha, int beta);
 };
