@@ -6,12 +6,34 @@ using std::cin;
 
 int main() {
 	int size,win;
-	char player;
+	char player = NULL;
 	cout << "Witaj sprawdz, czy uda ci sie nieprzegrac!" << endl;
-	cout << "Wybierz swojego wojownika (wpisz O lub X)" << endl;
+	cout << "Wybierz swojego wojownika (wpisz O lub X): " << endl;
 	cin >> player;
+	while (player != 'x' && player != 'X' && player != 'o' && player != 'O')
+	{
+		cout << "Nie ma takiego wojownika! Wybierz ponownie O lub X: " << endl;
+		cin >> player;
+	}
 	cout << "Podaj rozmiar pola oraz po spacji ile O (lub X) nalezy ulozyc, zeby wygrac:" << endl;
 	cin >> size >>win;
+
+	while (size <= 2)
+	{
+		cout << "Za male pole, taka gra nie ma sensu. Wczytaj rozmiar ponownie: " << endl;
+		cin >> size;
+		cout << endl;
+	}
+	while (win > size || win <=2)
+	{
+		if (win <= 2)
+			cout << "MA£OOOOOOO! ";
+		if (win > size)
+			cout << "No to sie przeciez nie zmiesci! ";
+		cout << "Wczytaj ponownie liczbe elementow do ulozenia: " << endl;
+		cin >> win;
+		cout << endl;
+	}
 	Game* TheGame = new Game(size,win);
 	cout << "Wybrano pole " << size << " x " << size << endl;
 	TheGame->setBoard();
